@@ -1,0 +1,17 @@
+version: '3'
+services:
+  postgresql:
+    image: ${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+    environment:
+     - POSTGRES_DB=${POSTGRES_DB_NAME}
+     - POSTGRES_USER=${POSTGRES_DB_USER}
+     - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+    volumes:
+      # Map a local volume to a container volume e.g. /data/postgresql:/var/lib/postgresql/data
+     - ${POSTGRES_APP_DATA_VOLUME}
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
